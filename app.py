@@ -10,7 +10,7 @@ st.set_page_config(
 # Título e Descrição
 st.title("🏢 Central de Certidões & Regularidade")
 st.write("Links diretos para emissão de certidões de condomínios e empresas.")
-st.write(f"**Usuário:** Victor Noronha | **Foco:** SP e Federal")
+st.write("**Foco:** SP e Federal") # Linha ajustada
 
 st.divider()
 
