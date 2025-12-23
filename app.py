@@ -10,7 +10,7 @@ st.set_page_config(
 # Título e Descrição
 st.title("🏢 Central de Certidões & Regularidade")
 st.write("Links diretos para emissão de certidões de condomínios e empresas.")
-st.write("**Foco:** SP e Federal") # Linha ajustada
+st.write("**Foco:** SP e Federal")
 
 st.divider()
 
@@ -68,7 +68,7 @@ col6, col7, col8 = st.columns(3)
 
 with col6:
     st.link_button(
-        "TJ-SP (Estadual)", 
+        "Falência - TJSP (estadual)", 
         "https://esaj.tjsp.jus.br/sco/abrirCadastro.do", 
         use_container_width=True,
         help="Certidão de Distribuição Cível/Criminal"
