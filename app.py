@@ -14,8 +14,10 @@ st.write("**Foco:** SP e Federal")
 
 st.divider()
 
-# --- GRUPO 1: FISCAL E PREFEITURA ---
+# --- GRUPO 1: FISCAL E CADASTRAL (FEDERAL/MUNICIPAL) ---
 st.subheader("🏛️ Regularidade Fiscal e Cadastral")
+
+# Linha 1: Os 3 principais
 col1, col2, col3 = st.columns(3)
 
 with col1:
@@ -40,6 +42,25 @@ with col3:
         "https://duc.prefeitura.sp.gov.br/certidoes/forms_anonimo/frmConsultaEmissaoCertificado.aspx", 
         use_container_width=True,
         help="Demonstrativo Unificado do Contribuinte"
+    )
+
+# Linha 2: Estadual e Junta Comercial (Novos links)
+col_a, col_b = st.columns(2)
+
+with col_a:
+    st.link_button(
+        "Sefaz SP (CND Estadual)", 
+        "https://www10.fazenda.sp.gov.br/CertidaoNegativaDeb/Pages/EmissaoCertidaoNegativa.aspx", 
+        use_container_width=True,
+        help="Certidão Negativa de Débitos Tributários da Dívida Ativa (Estadual)"
+    )
+
+with col_b:
+    st.link_button(
+        "Jucesp (Ficha Cadastral)", 
+        "https://www.jucesponline.sp.gov.br/Default.aspx", 
+        use_container_width=True,
+        help="Consulta de NIRE e dados societários na Junta Comercial"
     )
 
 # --- GRUPO 2: TRABALHISTA ---
