@@ -1,48 +1,101 @@
 import streamlit as st
 
-# Configuração da página (título da aba e layout)
+# Configuração da página
 st.set_page_config(
-    page_title="Links Úteis - Jurídico & Adm",
-    page_icon="⚖️",
+    page_title="Central de Certidões",
+    page_icon="🏢",
     layout="centered"
 )
 
-# Título Principal
-st.title("🏢 Central de Acesso Rápido")
-st.write("Links úteis para consulta de certidões e processos.")
-
-# --- SEÇÃO 1: CERTIDÕES E CARTÓRIOS ---
-st.header("📜 Certidões e Cartórios")
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.link_button("Cenprot (Protesto SP)", "https://www.protestosp.com.br/", use_container_width=True)
-    st.caption("Consulta gratuita de protesto em SP.")
-    
-    st.link_button("Receita Federal (CNPJ)", "https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/cnpjreva_solicitacao.asp", use_container_width=True)
-    st.caption("Emissão de comprovante de CNPJ.")
-
-with col2:
-    st.link_button("Certidão Negativa de Débitos", "https://www.gov.br/receitafederal/pt-br/assuntos/orientacao-tributaria/certidoes-e-situacao-fiscal", use_container_width=True)
-    st.caption("CND Federal e Trabalhista.")
-
-    st.link_button("Registradores (Imóveis)", "https://www.registradores.org.br/", use_container_width=True)
-    st.caption("Busca de bens e matrículas.")
+# Título e Descrição
+st.title("🏢 Central de Certidões & Regularidade")
+st.write("Links diretos para emissão de certidões de condomínios e empresas.")
+st.write(f"**Usuário:** Victor Noronha | **Foco:** SP e Federal")
 
 st.divider()
 
-# --- SEÇÃO 2: TRIBUNAIS ---
-st.header("⚖️ Tribunais de Justiça")
+# --- GRUPO 1: FISCAL E PREFEITURA ---
+st.subheader("🏛️ Regularidade Fiscal e Cadastral")
+col1, col2, col3 = st.columns(3)
 
-col3, col4 = st.columns(2)
+with col1:
+    st.link_button(
+        "Receita Federal (CNPJ)", 
+        "https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/cnpjreva_solicitacao.asp", 
+        use_container_width=True,
+        help="Situação Cadastral CNPJ"
+    )
+
+with col2:
+    st.link_button(
+        "Caixa (FGTS)", 
+        "https://consulta-crf.caixa.gov.br/consultacrf/pages/consultaEmpregador.jsf", 
+        use_container_width=True,
+        help="Certificado de Regularidade do FGTS"
+    )
 
 with col3:
-    st.link_button("TJ-SP (Consulta Processual)", "https://esaj.tjsp.jus.br/cpopg/open.do", use_container_width=True)
-    
+    st.link_button(
+        "Prefeitura SP (DUC)", 
+        "https://duc.prefeitura.sp.gov.br/certidoes/forms_anonimo/frmConsultaEmissaoCertificado.aspx", 
+        use_container_width=True,
+        help="Demonstrativo Unificado do Contribuinte"
+    )
+
+# --- GRUPO 2: TRABALHISTA ---
+st.subheader("👷 Regularidade Trabalhista")
+col4, col5 = st.columns(2)
+
 with col4:
-    st.link_button("TRT (Trtrabalhista)", "https://pje.trt2.jus.br/consultaprocessual/", use_container_width=True)
+    st.link_button(
+        "TST (CNDT Nacional)", 
+        "https://cndt-certidao.tst.jus.br/inicio.faces", 
+        use_container_width=True,
+        help="Certidão Negativa de Débitos Trabalhistas"
+    )
+
+with col5:
+    st.link_button(
+        "TRT-2 (Regional SP)", 
+        "https://pje.trt2.jus.br/certidoes/trabalhista/emissao", 
+        use_container_width=True,
+        help="Certidão de Ações Trabalhistas (SP/Baixada)"
+    )
+
+# --- GRUPO 3: JUDICIÁRIO E PROTESTOS ---
+st.subheader("⚖️ Justiça Comum e Protestos")
+col6, col7, col8 = st.columns(3)
+
+with col6:
+    st.link_button(
+        "TJ-SP (Estadual)", 
+        "https://esaj.tjsp.jus.br/sco/abrirCadastro.do", 
+        use_container_width=True,
+        help="Certidão de Distribuição Cível/Criminal"
+    )
+
+with col7:
+    st.link_button(
+        "TRF-3 (Federal)", 
+        "https://web.trf3.jus.br/certidao-regional/CertidaoCivelEleitoralCriminal/SolicitarDadosCertidao", 
+        use_container_width=True,
+        help="Certidão da Justiça Federal da 3ª Região"
+    )
+
+with col8:
+    st.link_button(
+        "Protesto SP (IEPTB)", 
+        "https://protestosp.com.br/consulta-de-protesto", 
+        use_container_width=True,
+        help="Consulta gratuita de protestos em cartório"
+    )
+
+st.divider()
 
 # --- NOTAS PESSOAIS ---
-with st.expander("📝 Notas Rápidas (Bloco de Notas)"):
-    st.text_area("Cole aqui números de processos ou anotações temporárias:", height=100)
+with st.expander("📝 Bloco de Notas (CNPJs e Observações)", expanded=True):
+    st.text_area(
+        "Cole aqui os CNPJs para consulta rápida:", 
+        placeholder="Ex: 00.000.000/0001-91\nEx: 11.111.111/0001-91",
+        height=150
+    )
