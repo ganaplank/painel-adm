@@ -1,122 +1,95 @@
 import streamlit as st
 
-# Configuração da página
+# --- CONFIGURAÇÃO DA PÁGINA ---
 st.set_page_config(
-    page_title="Central de Certidões",
+    page_title="Central de Regularidade",
     page_icon="🏢",
     layout="centered"
 )
 
-# Título e Descrição
-st.title("🏢 Central de Certidões & Regularidade")
-st.write("Links diretos para emissão de certidões de condomínios e empresas.")
-st.write("**Foco:** SP e Federal")
+# --- ESTILIZAÇÃO CSS (Visual "Bonitinho") ---
+st.markdown("""
+    <style>
+    /* Centraliza o título principal */
+    .main-title {
+        text-align: center;
+        font-weight: bold;
+        color: #2C3E50;
+        font-size: 2.5rem;
+        margin-bottom: 0px;
+    }
+    .sub-title {
+        text-align: center;
+        color: #5D6D7E;
+        margin-bottom: 20px;
+    }
+    /* Aumenta um pouco os botões para ficarem mais clicáveis */
+    .stLinkButton > a {
+        font-weight: 600;
+        border-radius: 8px;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-st.divider()
+# --- CABEÇALHO ---
+st.markdown('<div class="main-title">🏢 Central de Certidões</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Foco: São Paulo & Federal</div>', unsafe_allow_html=True)
 
-# --- GRUPO 1: FISCAL E CADASTRAL (FEDERAL/MUNICIPAL) ---
-st.subheader("🏛️ Regularidade Fiscal e Cadastral")
+# --- SEÇÃO 1: FISCAL & CADASTRAL (VERDE) ---
+# Usamos st.success para dar o tom VERDE (Dinheiro/Regularidade)
+with st.container():
+    st.subheader("📗 Regularidade Fiscal e Cadastral", divider="green")
+    
+    # Caixa verde clara para agrupar
+    with st.success():
+        col1, col2, col3 = st.columns(3)
+        with col1:
+            st.link_button("🏢 Receita (CNPJ)", "https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/cnpjreva_solicitacao.asp", use_container_width=True)
+        with col2:
+            st.link_button("🏦 Caixa (FGTS)", "https://consulta-crf.caixa.gov.br/consultacrf/pages/consultaEmpregador.jsf", use_container_width=True)
+        with col3:
+            st.link_button("🏙️ Pref. SP (DUC)", "https://duc.prefeitura.sp.gov.br/certidoes/forms_anonimo/frmConsultaEmissaoCertificado.aspx", use_container_width=True)
+        
+        # Linha de baixo
+        col4, col5 = st.columns(2)
+        with col4:
+            st.link_button("📍 Sefaz SP (Estadual)", "https://www10.fazenda.sp.gov.br/CertidaoNegativaDeb/Pages/EmissaoCertidaoNegativa.aspx", use_container_width=True)
+        with col5:
+            st.link_button("📂 Jucesp (Ficha)", "https://www.jucesponline.sp.gov.br/Default.aspx", use_container_width=True)
 
-# Linha 1: Os 3 principais
-col1, col2, col3 = st.columns(3)
+# --- SEÇÃO 2: TRABALHISTA (AZUL) ---
+# Usamos st.info para dar o tom AZUL (Corporativo)
+with st.container():
+    st.subheader("📘 Regularidade Trabalhista", divider="blue")
+    
+    with st.info():
+        col_t1, col_t2 = st.columns(2)
+        with col_t1:
+            st.link_button("👷 TST (CNDT Nacional)", "https://cndt-certidao.tst.jus.br/inicio.faces", use_container_width=True)
+        with col_t2:
+            st.link_button("⚖️ TRT-2 (Regional SP)", "https://pje.trt2.jus.br/certidoes/trabalhista/emissao", use_container_width=True)
 
-with col1:
-    st.link_button(
-        "Receita Federal (CNPJ)", 
-        "https://solucoes.receita.fazenda.gov.br/Servicos/cnpjreva/cnpjreva_solicitacao.asp", 
-        use_container_width=True,
-        help="Situação Cadastral CNPJ"
-    )
+# --- SEÇÃO 3: JURÍDICO & PROTESTO (VERMELHO/LARANJA) ---
+# Usamos st.warning ou st.error para dar destaque de ALERTA
+with st.container():
+    st.subheader("tc⚖️ Justiça e Protestos", divider="red")
+    
+    with st.error(): # Fundo avermelhado
+        col_j1, col_j2, col_j3 = st.columns(3)
+        with col_j1:
+            st.link_button("🏛️ Falência TJSP", "https://esaj.tjsp.jus.br/sco/abrirCadastro.do", use_container_width=True)
+        with col_j2:
+            st.link_button("⚖️ TRF-3 (Federal)", "https://web.trf3.jus.br/certidao-regional/CertidaoCivelEleitoralCriminal/SolicitarDadosCertidao", use_container_width=True)
+        with col_j3:
+            st.link_button("🚫 Protesto (IEPTB)", "https://protestosp.com.br/consulta-de-protesto", use_container_width=True)
 
-with col2:
-    st.link_button(
-        "Caixa (FGTS)", 
-        "https://consulta-crf.caixa.gov.br/consultacrf/pages/consultaEmpregador.jsf", 
-        use_container_width=True,
-        help="Certificado de Regularidade do FGTS"
-    )
-
-with col3:
-    st.link_button(
-        "Prefeitura SP (DUC)", 
-        "https://duc.prefeitura.sp.gov.br/certidoes/forms_anonimo/frmConsultaEmissaoCertificado.aspx", 
-        use_container_width=True,
-        help="Demonstrativo Unificado do Contribuinte"
-    )
-
-# Linha 2: Estadual e Junta Comercial (Novos links)
-col_a, col_b = st.columns(2)
-
-with col_a:
-    st.link_button(
-        "Sefaz SP (CND Estadual)", 
-        "https://www10.fazenda.sp.gov.br/CertidaoNegativaDeb/Pages/EmissaoCertidaoNegativa.aspx", 
-        use_container_width=True,
-        help="Certidão Negativa de Débitos Tributários da Dívida Ativa (Estadual)"
-    )
-
-with col_b:
-    st.link_button(
-        "Jucesp (Ficha Cadastral)", 
-        "https://www.jucesponline.sp.gov.br/Default.aspx", 
-        use_container_width=True,
-        help="Consulta de NIRE e dados societários na Junta Comercial"
-    )
-
-# --- GRUPO 2: TRABALHISTA ---
-st.subheader("👷 Regularidade Trabalhista")
-col4, col5 = st.columns(2)
-
-with col4:
-    st.link_button(
-        "TST (CNDT Nacional)", 
-        "https://cndt-certidao.tst.jus.br/inicio.faces", 
-        use_container_width=True,
-        help="Certidão Negativa de Débitos Trabalhistas"
-    )
-
-with col5:
-    st.link_button(
-        "TRT-2 (Regional SP)", 
-        "https://pje.trt2.jus.br/certidoes/trabalhista/emissao", 
-        use_container_width=True,
-        help="Certidão de Ações Trabalhistas (SP/Baixada)"
-    )
-
-# --- GRUPO 3: JUDICIÁRIO E PROTESTOS ---
-st.subheader("⚖️ Justiça Comum e Protestos")
-col6, col7, col8 = st.columns(3)
-
-with col6:
-    st.link_button(
-        "Falência - TJSP (estadual)", 
-        "https://esaj.tjsp.jus.br/sco/abrirCadastro.do", 
-        use_container_width=True,
-        help="Certidão de Distribuição Cível/Criminal"
-    )
-
-with col7:
-    st.link_button(
-        "TRF-3 (Federal)", 
-        "https://web.trf3.jus.br/certidao-regional/CertidaoCivelEleitoralCriminal/SolicitarDadosCertidao", 
-        use_container_width=True,
-        help="Certidão da Justiça Federal da 3ª Região"
-    )
-
-with col8:
-    st.link_button(
-        "Protesto SP (IEPTB)", 
-        "https://protestosp.com.br/consulta-de-protesto", 
-        use_container_width=True,
-        help="Consulta gratuita de protestos em cartório"
-    )
-
-st.divider()
-
-# --- NOTAS PESSOAIS ---
-with st.expander("📝 Bloco de Notas (CNPJs e Observações)", expanded=True):
+# --- BLOCO DE NOTAS (CINZA/NEUTRO) ---
+st.markdown("---")
+with st.expander("📝 **Bloco de Notas Rápido (CNPJs)**", expanded=True):
+    st.caption("Área de transferência temporária (Cole seus dados aqui)")
     st.text_area(
-        "Cole aqui os CNPJs para consulta rápida:", 
-        placeholder="Ex: 00.000.000/0001-91\nEx: 11.111.111/0001-91",
-        height=150
+        label="Area", 
+        label_visibility="collapsed",
+        placeholder="Cole aqui os CNPJs...\n00.000.000/0001-91",
+        height=120
     )
